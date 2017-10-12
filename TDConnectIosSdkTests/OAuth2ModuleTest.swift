@@ -37,15 +37,17 @@ func setupStubWithNSURLSessionDefaultConfiguration() {
                 let string = "{\"id\":\"10204448880356292\",\"first_name\":\"Corinne\",\"gender\":\"female\",\"last_name\":\"Krych\",\"link\":\"https:\\/\\/www.facebook.com\\/app_scoped_user_id\\/10204448880356292\\/\",\"locale\":\"en_GB\",\"name\":\"Corinne Krych\",\"timezone\":1,\"updated_time\":\"2014-09-24T10:51:12+0000\",\"verified\":true}"
                 let data = string.data(using: String.Encoding.utf8)
                 return OHHTTPStubsResponse(data:data!, statusCode: 200, headers: ["Content-Type" : "text/json"])
-            case "/o/oauth2/token":
+            case "/o/oauth2/token",
+                 "/ouath/token":
                 let string = "{\"access_token\":\"NEWLY_REFRESHED_ACCESS_TOKEN\", \"refresh_token\":\"REFRESH_TOKEN\",\"expires_in\":23, \"id_token\":\"NEW_ID_TOKEN\"}"
                 let data = string.data(using: String.Encoding.utf8)
                 return OHHTTPStubsResponse(data:data!, statusCode: 200, headers: ["Content-Type" : "text/json"])
-            case "/o/oauth2/revoke":
+            case "/o/oauth2/revoke",
+                 "/oauth/revoke",
+                 "/oauth/logout":
                 let string = "{}"
                 let data = string.data(using: String.Encoding.utf8)
                 return OHHTTPStubsResponse(data:data!, statusCode: 200, headers: ["Content-Type" : "text/json"])
-
             default: return OHHTTPStubsResponse(data:Data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }
         })
@@ -165,6 +167,24 @@ class OAuth2ModuleTests: XCTestCase {
         })
         waitForExpectations(timeout: 10, handler: nil)
     }
+    
+    func testLogOut() {
+        setupStubWithNSURLSessionDefaultConfiguration()
+        let expectation = self.expectation(description: "LogOut")
+        let config = TelenorConnectConfig(clientId: "telenordigital-connectexample-ios",
+            redirectUrl: "telenordigital-connectexample-ios://oauth2callback",
+            useStaging: true,
+            scopes: ["profile", "openid", "email"],
+            accountId: "telenor-connect-ios-hello-world")
+        let mockedSession = MockOAuth2SessionWithRefreshToken()
+        let oauth2Module = OAuth2Module(config: config, session: mockedSession)
+        oauth2Module.logOut { (success, error) in
+            XCTAssertTrue(mockedSession.clearTokensCalled, "revoke token reset session")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
 
     func testRevokeAccess() {
         setupStubWithNSURLSessionDefaultConfiguration()
@@ -176,7 +196,7 @@ class OAuth2ModuleTests: XCTestCase {
         let mockedSession = MockOAuth2SessionWithRefreshToken()
         let oauth2Module = OAuth2Module(config: googleConfig, session: mockedSession)
         oauth2Module.revokeAccess(completionHandler: {(response: AnyObject?, error: NSError?) -> Void in
-            XCTAssertTrue(mockedSession.initCalled == 1, "revoke token reset session")
+            XCTAssertTrue(mockedSession.clearTokensCalled, "revoke token reset session")
             expectation.fulfill()
         })
         waitForExpectations(timeout: 10, handler: nil)
