@@ -167,24 +167,6 @@ class OAuth2ModuleTests: XCTestCase {
         })
         waitForExpectations(timeout: 10, handler: nil)
     }
-    
-    func testLogOut() {
-        setupStubWithNSURLSessionDefaultConfiguration()
-        let expectation = self.expectation(description: "LogOut")
-        let config = TelenorConnectConfig(clientId: "telenordigital-connectexample-ios",
-            redirectUrl: "telenordigital-connectexample-ios://oauth2callback",
-            useStaging: true,
-            scopes: ["profile", "openid", "email"],
-            accountId: "telenor-connect-ios-hello-world")
-        let mockedSession = MockOAuth2SessionWithRefreshToken()
-        let oauth2Module = OAuth2Module(config: config, session: mockedSession)
-        oauth2Module.logOut { (success, error) in
-            XCTAssertTrue(mockedSession.clearTokensCalled, "revoke token reset session")
-            expectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10, handler: nil)
-    }
 
     func testRevokeAccess() {
         setupStubWithNSURLSessionDefaultConfiguration()

@@ -418,47 +418,6 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     }
     
     /**
-    Request to log out, including SSO.
-    */
-    open func logOut(completionHandler: @escaping (AnyObject?, NSError?) -> Void) {
-        guard
-            let _ = self.config.logOutEndpoint,
-            let _ = self.oauth2Session.refreshToken,
-            let _ = self.oauth2Session.accessToken
-            else {
-                revokeAccess(completionHandler: completionHandler)
-                return
-        }
-        
-        if (self.oauth2Session.tokenIsNotExpired()) {
-            callLogOutEndpoint(completionHandler: { (success, error) in
-                self.revokeAccess(completionHandler: completionHandler)
-            })
-            return
-        }
-        
-        self.refreshAccessToken(completionHandler: { (successRefresh, errorRefresh) in
-            if (errorRefresh != nil) {
-                self.revokeAccess(completionHandler: completionHandler)
-                return
-            }
-            
-            self.callLogOutEndpoint(completionHandler: { (successLogOut, errorLogOut) in
-                self.revokeAccess(completionHandler: completionHandler)
-            })
-        })
-    }
-    
-    private func callLogOutEndpoint(completionHandler: @escaping (Any?, NSError?) -> Void) {
-        let http = Http(baseURL: self.config.baseURL)
-        http.authzModule = self
-        http.request(method: .post, path: config.logOutEndpoint!) { (response, error) in
-            completionHandler(response, error)
-        }
-    }
-    
-    
-    /**
     Request to revoke access.
 
     :param: completionHandler A block object to be executed when the request operation finishes.
@@ -471,13 +430,8 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
         let paramDict: [String:String] = ["token":self.oauth2Session.accessToken!]
 
         http.request(method: .post, path: config.revokeTokenEndpoint!, parameters: paramDict as [String : AnyObject]?, completionHandler: { (response, error) in
-            if (error != nil) {
-                completionHandler(nil, error)
-                return
-            }
-
             self.oauth2Session.clearTokens()
-            completionHandler(response as AnyObject?, nil)
+            completionHandler(response as AnyObject?, error)
         })
     }
 
