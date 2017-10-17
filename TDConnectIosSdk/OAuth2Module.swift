@@ -416,7 +416,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     open func makeOpenIdClaim(fromDict: [String: AnyObject]) -> OpenIdClaim {
         return OpenIdClaim(fromDict: fromDict)
     }
-    
+
     /**
     Request to revoke access.
 
@@ -430,8 +430,13 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
         let paramDict: [String:String] = ["token":self.oauth2Session.accessToken!]
 
         http.request(method: .post, path: config.revokeTokenEndpoint!, parameters: paramDict as [String : AnyObject]?, completionHandler: { (response, error) in
+            if (error != nil) {
+                completionHandler(nil, error)
+                return
+            }
+
             self.oauth2Session.clearTokens()
-            completionHandler(response as AnyObject?, error)
+            completionHandler(response as AnyObject?, nil)
         })
     }
 
