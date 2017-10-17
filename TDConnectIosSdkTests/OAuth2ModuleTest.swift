@@ -184,6 +184,28 @@ class OAuth2ModuleTests: XCTestCase {
         waitForExpectations(timeout: 10, handler: nil)
     }
     
+    func testTelenorConnectOAuth2ModuleLogOutClearsTokens() {
+        setupStubWithNSURLSessionDefaultConfiguration()
+        let expectation = self.expectation(description: "logOut clears session tokens")
+        let config = TelenorConnectConfig(
+            clientId: "clientId",
+            redirectUrl: "redirectUrl",
+            useStaging: true,
+            scopes: ["scope1", "scope2"],
+            accountId: "accountId",
+            claims: ["claim1", "claim2"],
+            webView: false)
+        let mockedSession = MockOAuth2SessionWithRefreshToken()
+        let oauth2Module: OAuth2Module = TelenorConnectOAuth2Module(config: config, session: mockedSession)
+        oauth2Module.revokeAccess { (success, error) in
+            XCTAssertTrue(mockedSession.clearTokensCalled, "revoke token reset session")
+            XCTAssertNil(success)
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
     func testGetClaimsParamFormatsCorrectly() {
         let claims: Set<String> = ["email", "phone"]
         
