@@ -57,8 +57,8 @@ open class Config {
     open let userInfoEndpoint: String?
     
     /**
-    Endpoint for performing a token-based logout. This endpoint is useful if the user is not currently using a web browser, for instance in a native mobile app context.
-   */
+    Endpoint for performing a token-based logout, which will log the user out of any SSO session.
+    */
     open let logOutEndpoint: String?
 
     /**
