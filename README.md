@@ -11,7 +11,9 @@ OAuth2 Client based on [aerogear-ios-http](https://github.com/aerogear/aerogear-
 * revoke tokens,
 * permanent secure storage,
 
-100% Swift 2.0.
+100% Swift 3.0
+
+Please use the GitHub _Watch_ feature to get notified on new releases of the SDK.
 
 ## Hello World app using the SDK
 
@@ -42,7 +44,7 @@ To add the library in your project, you can either use [CocoaPods](http://cocoap
 In your ```Podfile``` add:
 
 ```
-pod 'TDConnectIosSdk', :git => 'https://github.com/telenordigital/connect-ios-sdk'
+pod 'TDConnectIosSdk'
 ```
 
 and then:
@@ -67,27 +69,27 @@ git submodule add https://github.com/telenordigital/connect-ios-sdk.git
 
 ## Advanced Usage
 
-### Confidenetial Client
+### Confidential Client
 
 To set the SDK to **Confidential Client** mode set the optional init parameter in the `Config` object named `isPublicClient` to `false`. Otherwise it will default to a **public client**.
-A confidential client will not exchange the authorization code but simply return this to the client through the callback. The app code can then send this to a third party client server.
+A confidential client will not exchange the authorization code but simply return this to the client through the callback. The app code can then send this to the server-side component of the client.
 
 See [http://docs.telenordigital.com/connect/id/native_apps.html](http://docs.telenordigital.com/connect/id/native_apps.html) for more information.
 
 ```swift
-override func viewDidAppear(animated: Bool) {
-	super.viewDidAppear(animated)
-	let config = TelenorConnectConfig(clientId: "telenordigital-connectexample-ios",
-	    redirectUrl: "telenordigital-connectexample-ios://oauth2callback",
-	    useStaging: true,
-	    scopes: ["profile", "openid", "email"],
-	    accountId: "telenor-connect-ios-hello-world",
-	    isPublicClient: false) // this variable needs to be present
-
-	let oauth2Module = AccountManager.getAccountByConfig(config) 
-		?? AccountManager.addAccount(self.config, moduleClass: TelenorConnectOAuth2Module.self)
-
-	oauth2Module.requestAuthorizationCode { (authorizationCode: AnyObject?, error: NSError?) in
+override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    let config = TelenorConnectConfig(clientId: "telenordigital-connectexample-ios",
+                                      redirectUrl: "telenordigital-connectexample-ios://oauth2callback",
+                                      useStaging: true,
+                                      scopes: ["profile", "openid", "email"],
+                                      accountId: "telenor-connect-ios-hello-world",
+                                      isPublicClient: false) // this variable needs to be present
+    
+    let oauth2Module = AccountManager.getAccountBy(config: config)
+        ?? AccountManager.addAccountWith(config: self.config, moduleClass: TelenorConnectOAuth2Module.self)
+    
+    oauth2Module.requestAuthorizationCode { (authorizationCode: AnyObject?, error: NSError?) in
         if (error != nil) {
             // handle error
             return
