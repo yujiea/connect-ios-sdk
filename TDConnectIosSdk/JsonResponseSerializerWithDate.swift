@@ -1,5 +1,5 @@
 //
-//  TelenorConnectOAuth2Module.swift
+//  JsonResponseSerializerWithDate.swift
 //  Pods
 //
 //  Created by Jørund Fagerjord on 15/03/18.
