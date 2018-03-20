@@ -59,7 +59,7 @@ public func validateIdToken(token: [String:AnyObject], expectedIssuer: String, e
     }
     
     let expirationDate = Date(timeIntervalSince1970: experationTime)
-    if isInvalidExpirationTime(expirationDate: expirationDate, serverDate: serverTime) {
+    if !isValidExpirationTime(expirationDate: expirationDate, serverDate: serverTime) {
         return IdTokenValidationError.Expired("ID token has expired.")
     }
     
@@ -70,15 +70,15 @@ public func validateIdToken(token: [String:AnyObject], expectedIssuer: String, e
     return nil
 }
 
-func isInvalidExpirationTime(expirationDate: Date, serverDate: Date?) -> Bool {
+func isValidExpirationTime(expirationDate: Date, serverDate: Date?) -> Bool {
     if expirationDate.timeIntervalSinceNow.sign == FloatingPointSign.plus {
-        return false
-    }
-    
-    guard let serverDate = serverDate else {
         return true
     }
     
-    let expired = expirationDate <= serverDate
+    guard let serverDate = serverDate else {
+        return false
+    }
+    
+    let expired = expirationDate > serverDate
     return expired
 }

@@ -22,9 +22,10 @@ open class JsonResponseSerializerWithDate: JsonResponseSerializer {
         self.validation = { (response: URLResponse?, data: Data) throws -> Void in
             try superValidation(response, data)
             let httpResponse = response as! HTTPURLResponse
-            if let contentType = httpResponse.allHeaderFields["Date"] as? String {
-                self.lastServerTime = self.dateFormatter.date(from: contentType)
+            guard let serverDate = httpResponse.allHeaderFields["Date"] as? String else {
+                return
             }
+            self.lastServerTime = self.dateFormatter.date(from: serverDate)
         }
     }
     

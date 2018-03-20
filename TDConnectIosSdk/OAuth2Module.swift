@@ -593,10 +593,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
         }
         
         let serverTime = self.jsonResponseSerializerWithDate?.lastServerTime
-        if let failure = validateIdToken(token: token as [String : AnyObject], expectedIssuer: self.config.baseURL, expectedAudience: self.config.clientId, serverTime: serverTime) {
-            return failure
-        }
-        return nil
+        return validateIdToken(token: token as [String : AnyObject], expectedIssuer: self.config.baseURL, expectedAudience: self.config.clientId, serverTime: serverTime)
     }
     
     public func getIdTokenEncoded() -> String? {
