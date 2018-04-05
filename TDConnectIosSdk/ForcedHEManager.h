@@ -8,8 +8,7 @@
 + (bool)isCellularEnabled;
 + (bool)shouldFetchThroughCellular:(NSString *)url;
 + (NSDictionary *) openUrlThroughCellular:(NSString *)url;
-+ (void)initForcedHE:(NSString *)wellKnownConfigurationEndpoint;
-+ (void)fetchWellknown:(NSString *)wellKnownConfigurationEndpoint completion:(void(^)(BOOL))completionHandler;
++ (void)initForcedHE:(NSSet* )urlsForHE;
 @end
 
 #endif
