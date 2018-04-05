@@ -140,20 +140,20 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
 
         super.init()
 
+        ForcedHEManager.initForcedHE()
         self.fetchWellknownConfig()
     }
 
     func fetchWellknownConfig() {
-        let url = URL(string: config.wellKnownConfigurationEndpoint!)
-        URLSession.shared.dataTask(with:url!, completionHandler: {(data, response, error) in
-            guard let data = data, error == nil else { return }
-
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
-                self.urlsForHE = json["network_authentication_target_urls"] as? [String]
-                ForcedHEManager.initForcedHE(Set<String>(self.urlsForHE!));
-            } catch { }
-        }).resume()
+        Http().request(method: .get, path: config.wellKnownConfigurationEndpoint!, completionHandler: { (response, error) in
+            guard let unwrappedResponse = response as? [String: AnyObject], error == nil else {
+                return;
+            }
+            guard let urls = unwrappedResponse["network_authentication_target_urls"] as? [String] else {
+                return
+            }
+            ForcedHEManager.setHEUrls(Set<String>(urls))
+        });
     }
 
     func getBrowserTypeToUse() -> BrowserType {

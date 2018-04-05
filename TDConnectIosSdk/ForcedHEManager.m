@@ -15,10 +15,14 @@ int MAX_REDIRECTS_TO_FOLLOW_FOR_HE = 5;
 
 static NSSet *_urlsForHE = nil;
 
-+ (void)initForcedHE:(NSSet *)urlsForHE {
++ (void)initForcedHE {
     curl_global_init(CURL_GLOBAL_DEFAULT);
+}
 
-    _urlsForHE = urlsForHE;
++ (void)setHEUrls:(NSSet *)urlsForHE {
+    @synchronized(self) {
+        _urlsForHE = urlsForHE;
+    }
 }
 
 + (bool)isInterfaceEnabled:(NSString *)iface {
