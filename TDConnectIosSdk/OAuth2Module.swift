@@ -145,7 +145,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     }
 
     func fetchWellknownConfig() {
-        Http().request(method: .get, path: config.wellKnownConfigurationEndpoint!, completionHandler: { (response, error) in
+        self.http.request(method: .get, path: config.wellKnownConfigurationEndpoint!, completionHandler: { (response, error) in
             guard let unwrappedResponse = response as? [String: AnyObject], error == nil else {
                 return;
             }
