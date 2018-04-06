@@ -165,8 +165,6 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             if let analyticsEndpoint = unwrappedResponse["telenordigital_sdk_analytics_endpoint"] as? String {
                 self.analyticsEndpoint = analyticsEndpoint + "/V1/ios/";
             }
-            self.analyticsEndpoint = "http://10.9.0.177:9090/sdk"
-            self.analyticsEndpoint = self.analyticsEndpoint! + "/V1/ios/";
         });
     }
 
