@@ -411,7 +411,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             return
         }
 
-        var paramDict = [String: String]();
+        var paramDict = [String: String]()
 
         if let logSessionId = self.logSessionId {
             paramDict["lsi"] = logSessionId
@@ -435,11 +435,19 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             paramDict["subject"] = subjectId
         }
 
+        paramDict["deviceName"] = UIDevice.current.name;
+        paramDict["deviceModel"] = UIDevice.current.model;
+        paramDict["deviceModel"] = UIDevice.current.model;
+        paramDict["osName"] = UIDevice.current.systemName;
+        paramDict["osVersion"] = UIDevice.current.systemVersion;
+
+
         let http = Http()
         if accessToken != nil {
             http.authzModule = self
         }
         http.request(method: .post, path: analyticsEndpoint, parameters: paramDict as [String : AnyObject]?, completionHandler: { (response, error) in
+
         });
     }
 
