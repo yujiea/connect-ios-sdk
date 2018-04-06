@@ -157,7 +157,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     func fetchWellknownConfig() {
         self.http.request(method: .get, path: config.wellKnownConfigurationEndpoint!, completionHandler: { (response, error) in
             guard let unwrappedResponse = response as? [String: AnyObject], error == nil else {
-                return;
+                return
             }
             if let heUrls = unwrappedResponse["network_authentication_target_urls"] as? [String] {
                 ForcedHEManager.setHEUrls(Set<String>(heUrls))
