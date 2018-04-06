@@ -109,10 +109,10 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     var logSessionId: String?
     var advertisingId: String?
     var analyticsEndpoint: String?
-    var tsSdkInitiliazation:NSInteger?
-    var tsLoginButtonClicked:NSInteger?
-    var tsRedirectUrlInvoked:NSInteger?
-    var tsTokenResponseReceived:NSInteger?
+    var tsSdkInitiliazation: NSInteger?
+    var tsLoginButtonClicked: NSInteger?
+    var tsRedirectUrlInvoked: NSInteger?
+    var tsTokenResponseReceived: NSInteger?
 
     /**
     Initialize an OAuth2 module.
