@@ -451,7 +451,6 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             http.authzModule = self
         }
         http.request(method: .post, path: analyticsEndpoint, parameters: paramDict as [String : AnyObject]?, completionHandler: { (response, error) in
-
         })
     }
 
@@ -510,7 +509,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
                 idToken: idToken)
 
             let idTokenPayload = self.getIdTokenPayload()
-            let subjectId = idTokenPayload!["sub"] as? String
+            let subjectId = idTokenPayload?["sub"] as? String
             self.sendAnalyticsData(accessToken: accessToken, subjectId: subjectId)
 
             completionHandler(accessToken as AnyObject?, nil)
