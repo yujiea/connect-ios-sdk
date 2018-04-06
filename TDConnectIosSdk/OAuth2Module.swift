@@ -165,7 +165,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             if let analyticsEndpoint = unwrappedResponse["telenordigital_sdk_analytics_endpoint"] as? String {
                 self.analyticsEndpoint = analyticsEndpoint + "/V1/ios/";
             }
-            self.analyticsEndpoint = "http://localhost:9090/sdk"
+            self.analyticsEndpoint = "http://10.9.0.177:9090/sdk"
             self.analyticsEndpoint = self.analyticsEndpoint! + "/V1/ios/";
         });
     }
@@ -434,13 +434,17 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
         if let subjectId = subjectId {
             paramDict["subject"] = subjectId
         }
+        if let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String {
+            paramDict["appName"] = appName
+        }
+        if let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+            paramDict["appVersion"] = appVersion
+        }
 
-        paramDict["deviceName"] = UIDevice.current.name;
-        paramDict["deviceModel"] = UIDevice.current.model;
-        paramDict["deviceModel"] = UIDevice.current.model;
-        paramDict["osName"] = UIDevice.current.systemName;
-        paramDict["osVersion"] = UIDevice.current.systemVersion;
-
+        paramDict["deviceName"] = UIDevice.current.name
+        paramDict["deviceModel"] = UIDevice.current.modelName
+        paramDict["osName"] = UIDevice.current.systemName
+        paramDict["osVersion"] = UIDevice.current.systemVersion
 
         let http = Http()
         if accessToken != nil {
@@ -448,7 +452,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
         }
         http.request(method: .post, path: analyticsEndpoint, parameters: paramDict as [String : AnyObject]?, completionHandler: { (response, error) in
 
-        });
+        })
     }
 
     /**
