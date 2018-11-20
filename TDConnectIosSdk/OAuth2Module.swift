@@ -69,7 +69,7 @@ public enum BrowserType {
     }
 }
 
-fileprivate extension UIApplication {
+internal extension UIApplication {
     var tdcTopViewController: UIViewController? {
         guard let rootViewController = keyWindow?.rootViewController else {
             return nil
@@ -619,6 +619,15 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             self.oauth2Session.clearTokens()
             completionHandler(response as AnyObject?, nil)
         })
+    }
+    
+    /**
+    Starts the authentication process.
+    */
+    open func authenticate(viewController: UIViewController, oauth2Module: OAuth2Module, completionHandler: ((_ error:Error?)->Void)?){
+        let useBiometrics = self.config.useBiometrics
+        let localizedReasonString = self.config.biometricsString
+        AuthenticationHandler.authenticate(viewController: viewController, useBiometrics: useBiometrics, localizedReasonString: localizedReasonString, oauth2Module: oauth2Module, callback:completionHandler)
     }
 
     /**

@@ -139,6 +139,16 @@ open class Config {
     open var isWebView: Bool = false
     
     /**
+     Boolean to indicate whether or not to use biometric authentication if the user already has a session
+    */
+    open var useBiometrics: Bool = false
+    
+    /**
+    Text to be displayed to users when using biometric authentication. Does nothing if useBiometrics is not set to true
+    */
+    open var biometricsString: String?
+    
+    /**
     Boolean to indicate whether the client is a public client (true) or a confidential client (false).
     A public client will exchange the authorization code for tokens, on successful authentication and authorization.
     A confidential client will not exchange the authorization code but simply return this to the client through the callback, on successful authentication and authorization.
