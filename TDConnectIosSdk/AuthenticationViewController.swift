@@ -18,7 +18,6 @@ class AuthenticationViewController: UIViewController {
     var cameFrom: UIViewController?
     
     override func viewDidLoad() {
-        
         //Closes the view and calls the callback if there is none, else does nothing
         let callbackWrapper: (Error?)->Void = { error in
             guard self.callback != nil else{
@@ -53,6 +52,7 @@ class AuthenticationViewController: UIViewController {
             AuthenticationHandler.authenticateWithConnectId(oauth2Module: self.oauth2Module!, callback: callbackWrapper)
             return
         }
+        
         AuthenticationHandler.authenticateWithBiometrics(localizedReasonString: self.localizedReasonString!, completion: biometricsCallback)
         
     }

@@ -39,7 +39,7 @@ class AuthenticationHandler{
         
     }
     
-    static func authenticate(viewController: UIViewController, useBiometrics: Bool = false, localizedReasonString:String? = NSLocalizedString("please_identify", comment: "Text to be used presented to the user when authenticating with biometrics"),  oauth2Module:OAuth2Module, callback:((_ error:Error?)->Void)?){
+    static func authenticate(viewController: UIViewController, useBiometrics: Bool = false, localizedReasonString:String = NSLocalizedString("please_identify", comment: "Text to be shown when authenticating the user with biometrics"),  oauth2Module:OAuth2Module, callback:((_ error:Error?)->Void)?){
         //Use biometrics if available
         if(useBiometrics){
             let newViewController = AuthenticationViewController(nibName:"AuthenticationViewController" , bundle: nil)
@@ -116,11 +116,9 @@ class AuthenticationHandler{
         }
         oauth2Module.requestAccess {(accessToken: AnyObject?, error: NSError?) -> Void in
             guard let accessToken = accessToken else {
-                print("error=\(String(describing: error))")
                 callback?(error)
                 return
             }
-            print("accessToken=\(accessToken)")
             callback?(error)
             return
         }

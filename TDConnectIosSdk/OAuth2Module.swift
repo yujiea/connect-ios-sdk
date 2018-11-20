@@ -626,8 +626,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     */
     open func authenticate(viewController: UIViewController, oauth2Module: OAuth2Module, completionHandler: ((_ error:Error?)->Void)?){
         let useBiometrics = self.config.useBiometrics
-        let localizedReasonString = self.config.biometricsString
-        AuthenticationHandler.authenticate(viewController: viewController, useBiometrics: useBiometrics, localizedReasonString: localizedReasonString, oauth2Module: oauth2Module, callback:completionHandler)
+        AuthenticationHandler.authenticate(viewController: viewController, useBiometrics: useBiometrics, oauth2Module: oauth2Module, callback:completionHandler)
     }
 
     /**
