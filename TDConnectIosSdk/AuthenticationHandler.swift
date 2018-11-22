@@ -7,9 +7,8 @@
 //
 
 import LocalAuthentication
-import TDConnectIosSdk
 
-enum BiometricTypes: String{
+public enum BiometricTypes: String{
     case face_id = "Face Id"
     case touch_id = "Touch Id"
     case none = "None"
@@ -39,14 +38,17 @@ class AuthenticationHandler{
         
     }
     
-    static func authenticate(viewController: UIViewController, useBiometrics: Bool = false, localizedReasonString:String = NSLocalizedString("please_identify", comment: "Text to be shown when authenticating the user with biometrics"),  oauth2Module:OAuth2Module, callback:((_ error:Error?)->Void)?){
+    static func authenticate(viewController: UIViewController, useBiometrics: Bool = false, localizedReasonString:String, oauth2Module:OAuth2Module, callback:((_ error:Error?)->Void)?){
         //Use biometrics if available
         if(useBiometrics){
-            let newViewController = AuthenticationViewController(nibName:"AuthenticationViewController" , bundle: nil)
+            let bundle = Bundle(for: AuthenticationViewController.self)
+            bundle.load()
+           let newViewController = AuthenticationViewController(nibName:"AuthenticationViewController" , bundle: bundle)
             newViewController.callback = callback
             newViewController.oauth2Module = oauth2Module
             newViewController.localizedReasonString = localizedReasonString
             newViewController.cameFrom = viewController
+            
             viewController.present(newViewController, animated: true, completion: nil)
             return
         }
@@ -66,12 +68,13 @@ class AuthenticationHandler{
     
     static func authenticateWithBiometrics(localizedReasonString: String, completion: ((_ error:Error?)->Void)?){
         let context = LAContext()
+        let bundle = Bundle(for: AuthenticationViewController.self)
         
         if #available(iOS 10.0, *) {
-            context.localizedCancelTitle = NSLocalizedString("cancel", comment: "Text to be shown on the cancel button")
+            context.localizedCancelTitle = NSLocalizedString("cancel", bundle:bundle, comment: "Text to be shown on the cancel button")
         }
         
-        context.localizedFallbackTitle = NSLocalizedString("use_connect_id", comment: "Text to be shown on the fallback button")
+        context.localizedFallbackTitle = NSLocalizedString("use_connect_id", bundle:bundle, comment: "Text to be shown on the fallback button")
         
         let callbackWrapper: (Error?)->Void = { error in
             guard completion != nil else{

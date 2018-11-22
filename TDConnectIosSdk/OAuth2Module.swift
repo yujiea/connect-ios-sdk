@@ -626,7 +626,17 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     */
     open func authenticate(viewController: UIViewController, oauth2Module: OAuth2Module, completionHandler: ((_ error:Error?)->Void)?){
         let useBiometrics = self.config.useBiometrics
-        AuthenticationHandler.authenticate(viewController: viewController, useBiometrics: useBiometrics, oauth2Module: oauth2Module, callback:completionHandler)
+        let bundle = Bundle(for: AuthenticationViewController.self)
+        let reasonString = NSLocalizedString("please_identify", bundle: bundle, comment: "Text to be shown when authenticating the user with biometrics" )
+        
+        AuthenticationHandler.authenticate(viewController: viewController, useBiometrics: useBiometrics, localizedReasonString: reasonString, oauth2Module: oauth2Module, callback:completionHandler)
+    }
+    
+    /**
+     returns the available biometrics for your device. Either none, face id or touch id
+    */
+    public func getAvailableBiometrics() -> BiometricTypes{
+       return AuthenticationHandler.getAvailableBiometrics()
     }
 
     /**
