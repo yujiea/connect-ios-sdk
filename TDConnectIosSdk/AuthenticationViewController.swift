@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TDConnectIosSdk
 import LocalAuthentication
 
 class AuthenticationViewController: UIViewController {
@@ -27,13 +26,18 @@ class AuthenticationViewController: UIViewController {
             let dismissCallback = {
                 self.callback!(error)
             }
-            
-            if(UIApplication.shared.tdcTopViewController == self){
+            //Ugly hack to support using a webview
+            //TODO: find a better way of doing this
+            DispatchQueue.main.async {
+                let currentController = UIApplication.shared.tdcTopViewController
+                //Check if you have already been dismissed and have been sent elsewhere
+                if(currentController == self.cameFrom){
+                    dismissCallback()
+                    return
+                }
                 self.dismiss(animated: false, completion: dismissCallback)
                 return
             }
-            dismissCallback()
-            return
         }
         
         //Calls the callbackwrapper unless the user chose to use fallback mechanism for logging in
