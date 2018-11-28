@@ -11,53 +11,43 @@ import LocalAuthentication
 
 class AuthenticationViewController: UIViewController {
     
-    var callback: ((_ error:Error?)->Void)?
+    var callback: ((AnyObject?, NSError?) -> Void)?
     var oauth2Module: OAuth2Module?
     var localizedReasonString: String?
     var cameFrom: UIViewController?
     
     override func viewDidLoad() {
         //Closes the view and calls the callback if there is none, else does nothing
-        let callbackWrapper: (Error?)->Void = { error in
-            guard self.callback != nil else{
-                self.dismiss(animated: true, completion: nil)
-                return
-            }
-            let dismissCallback = {
-                self.callback!(error)
-            }
+        let callbackWrapper: (AnyObject?, NSError?) -> Void = { token, error in
             //Ugly hack to support using a webview
             //TODO: find a better way of doing this
             DispatchQueue.main.async {
                 let currentController = UIApplication.shared.tdcTopViewController
                 //Check if you have already been dismissed and have been sent elsewhere
-                if(currentController == self.cameFrom){
-                    dismissCallback()
+                if (currentController == self.cameFrom) {
+                    self.callback?(token, error)
                     return
                 }
-                self.dismiss(animated: false, completion: dismissCallback)
+                self.dismiss(animated: false, completion: {
+                    self.callback?(token, error)
+                })
                 return
             }
         }
         
         //Calls the callbackwrapper unless the user chose to use fallback mechanism for logging in
-        let biometricsCallback: (Error?)->Void = { error in
+        let biometricsCallback: (AnyObject?, NSError?) -> Void = { token, error in
             if (error != nil) {
                 let laError = error as! LAError
-                if ((laError.code) == LAError.userFallback){
-                    AuthenticationHandler.authenticateWithConnectId(oauth2Module: self.oauth2Module!, callback: callbackWrapper)
+                if ((laError.code) == LAError.userFallback) {
+                    AuthenticationHandler.clearUserAndauthenticateWithConnectId(oauth2Module: self.oauth2Module!, callback: callbackWrapper)
                     return
                 }
             }
-            callbackWrapper(error)
+            callbackWrapper(token, error)
         }
         
-        guard oauth2Module?.oauth2Session.accessToken != nil && AuthenticationHandler.getAvailableBiometrics() != BiometricTypes.none else {
-            AuthenticationHandler.authenticateWithConnectId(oauth2Module: self.oauth2Module!, callback: callbackWrapper)
-            return
-        }
-        
-        AuthenticationHandler.authenticateWithBiometrics(localizedReasonString: self.localizedReasonString!, completion: biometricsCallback)
+        AuthenticationHandler.authenticateWithBiometrics(oauth2Module: oauth2Module!, localizedReasonString: self.localizedReasonString!, completion: biometricsCallback)
         
     }
 }

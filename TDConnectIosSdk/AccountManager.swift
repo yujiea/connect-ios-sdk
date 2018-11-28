@@ -147,7 +147,6 @@ open class TelenorConnectConfig: Config {
             claims: claims,
             optionalParams: optionalParams,
             isWebView: webView,
-            useBiometrics: useBiometrics,
             isPublicClient: isPublicClient)
     }
 }

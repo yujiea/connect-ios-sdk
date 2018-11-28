@@ -43,9 +43,9 @@
 		5CF359B31CAA8C800064C43D /* TelenorConnectOAuth2Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF359B11CAA8C800064C43D /* TelenorConnectOAuth2Module.swift */; };
 		6F1432B81A168594003BEE5B /* TDConnectIosSdk.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 4833046219AF1635002F8DA9 /* TDConnectIosSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F74D7BCCF0D94A87CEEB1FE /* Pods_TDConnectIosSdkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A11A0B9B0A172620872B76 /* Pods_TDConnectIosSdkTests.framework */; };
+		D0064E6B21AEBBAF00ACAB0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0064E6A21AEBBAF00ACAB0D /* Assets.xcassets */; };
 		D04CBCF2219EE543004053AC /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CBCF0219EE543004053AC /* AuthenticationViewController.swift */; };
 		D04CBCF3219EE543004053AC /* AuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D04CBCF1219EE543004053AC /* AuthenticationViewController.xib */; };
-		D04CBCF5219EE6A8004053AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04CBCF4219EE6A8004053AC /* Assets.xcassets */; };
 		D0786EEA21A40A4D009D8A6F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0786EEC21A40A4D009D8A6F /* Localizable.strings */; };
 		D0A0A1372195826D004F36A1 /* AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0A1362195826D004F36A1 /* AuthenticationHandler.swift */; };
 /* End PBXBuildFile section */
@@ -119,10 +119,10 @@
 		BE960CF64C41D83A722A3E4A /* Pods_TDConnectIosSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TDConnectIosSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5CBDFC0086B2EEE36A81AFD /* Pods-TDConnectIosSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TDConnectIosSdk.release.xcconfig"; path = "Pods/Target Support Files/Pods-TDConnectIosSdk/Pods-TDConnectIosSdk.release.xcconfig"; sourceTree = "<group>"; };
 		CAF4DA6D67969EE7E6DB6C71 /* Pods-TDConnectIosSdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TDConnectIosSdkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TDConnectIosSdkTests/Pods-TDConnectIosSdkTests.release.xcconfig"; sourceTree = "<group>"; };
+		D0064E6A21AEBBAF00ACAB0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		D041EDA421A4264A003B8ABA /* nb-NO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "nb-NO"; path = "nb-NO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D04CBCF0219EE543004053AC /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		D04CBCF1219EE543004053AC /* AuthenticationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthenticationViewController.xib; sourceTree = "<group>"; };
-		D04CBCF4219EE6A8004053AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0786EEB21A40A4D009D8A6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0A0A1362195826D004F36A1 /* AuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,7 +196,7 @@
 				D04CBCF0219EE543004053AC /* AuthenticationViewController.swift */,
 				D0A0A1362195826D004F36A1 /* AuthenticationHandler.swift */,
 				D0786EEC21A40A4D009D8A6F /* Localizable.strings */,
-				D04CBCF4219EE6A8004053AC /* Assets.xcassets */,
+				D0064E6A21AEBBAF00ACAB0D /* Assets.xcassets */,
 			);
 			path = TDConnectIosSdk;
 			sourceTree = "<group>";
@@ -368,8 +368,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D04CBCF5219EE6A8004053AC /* Assets.xcassets in Resources */,
 				D0786EEA21A40A4D009D8A6F /* Localizable.strings in Resources */,
+				D0064E6B21AEBBAF00ACAB0D /* Assets.xcassets in Resources */,
 				D04CBCF3219EE543004053AC /* AuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

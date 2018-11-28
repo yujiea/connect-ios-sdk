@@ -531,15 +531,14 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             completionHandler(accessToken as AnyObject?, nil)
         })
     }
-
+    
     /**
-    Gateway to request authorization access.
-
-    :param: completionHandler A block object to be executed when the request operation finishes.
-    */
+     Gateway to request authorization access.
+     
+     :param: completionHandler A block object to be executed when the request operation finishes.
+     */
     open func requestAccess(completionHandler: @escaping (AnyObject?, NSError?) -> Void) {
-        if (self.oauth2Session.accessToken != nil && self.oauth2Session.tokenIsNotExpired()) {
-            // we already have a valid access token, nothing more to be done
+         if (self.oauth2Session.accessToken != nil && self.oauth2Session.tokenIsNotExpired()) {
             completionHandler(self.oauth2Session.accessToken! as AnyObject?, nil)
         } else if (self.oauth2Session.refreshToken != nil && self.oauth2Session.refreshTokenIsNotExpired()) {
             // need to refresh token
@@ -550,7 +549,36 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             self.requestAuthorizationCode(completionHandler: completionHandler)
         }
     }
-
+    
+    /**
+     Gateway to request authorization access.
+     
+     :param: completionHandler A block object to be executed when the request operation finishes.
+     */
+    open func requestAccess(completionHandler: @escaping (AnyObject?, NSError?) -> Void, useBiometrics:Bool? = false) {
+        let bundle = Bundle(for: AuthenticationViewController.self)
+        let localizedReasonString = NSLocalizedString("please_identify", bundle: bundle, comment: "Text to be shown to the user when authenticating with biometrics")
+        let cameFrom = UIApplication.shared.tdcTopViewController
+        if (self.oauth2Session.accessToken != nil && self.oauth2Session.tokenIsNotExpired()) {
+            if (useBiometrics!) {
+                self.requestAccessWithBiometrics(cameFrom: cameFrom, localizedReasonString: localizedReasonString, completionHandler: completionHandler)
+                return
+            }
+            completionHandler(self.oauth2Session.accessToken! as AnyObject?, nil)
+        } else if (self.oauth2Session.refreshToken != nil && self.oauth2Session.refreshTokenIsNotExpired()) {
+            // need to refresh token
+            if (useBiometrics!) {
+                self.requestAccessWithBiometrics(cameFrom: cameFrom, localizedReasonString: localizedReasonString, completionHandler: completionHandler)
+                return
+            }
+            self.refreshAccessToken(completionHandler: completionHandler)
+        } else {
+            self.tsLoginButtonClicked = Int64(NSDate().timeIntervalSince1970 * 1000);
+            // ask for authorization code and once obtained exchange code for access token
+            self.requestAuthorizationCode(completionHandler: completionHandler)
+        }
+    }
+    
     /**
     Gateway to provide authentication using the Authorization Code Flow with OpenID Connect.
 
@@ -622,20 +650,9 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     }
     
     /**
-    Starts the authentication process.
-    */
-    open func authenticate(viewController: UIViewController, oauth2Module: OAuth2Module, localizedReasonString:String? = nil, completionHandler: ((_ error:Error?)->Void)?){
-        let useBiometrics = self.config.useBiometrics
-        let bundle = Bundle(for: AuthenticationViewController.self)
-        let reasonString = localizedReasonString ?? NSLocalizedString("please_identify", bundle: bundle, comment: "Text to be shown when authenticating the user with biometrics" )
-        
-        AuthenticationHandler.authenticate(viewController: viewController, useBiometrics: useBiometrics, localizedReasonString: reasonString, oauth2Module: oauth2Module, callback:completionHandler)
-    }
-    
-    /**
      returns the available biometrics for your device. Either none, face id or touch id
     */
-    public func getAvailableBiometrics() -> BiometricTypes{
+    public func getAvailableBiometrics() -> BiometricType{
        return AuthenticationHandler.getAvailableBiometrics()
     }
 
@@ -659,6 +676,14 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     */
     open func isAuthorized() -> Bool {
         return self.oauth2Session.accessToken != nil && self.oauth2Session.tokenIsNotExpired()
+    }
+    
+    func requestAccessWithBiometrics(cameFrom: UIViewController?, localizedReasonString: String? = nil,  completionHandler: @escaping (AnyObject?, NSError?) -> Void){
+        let bundle = Bundle(for: AuthenticationViewController.self)
+        let reasonString = localizedReasonString ?? NSLocalizedString("please_identify", bundle: bundle, comment: "Text to be shown when authenticating the user with biometrics" )
+        
+        AuthenticationHandler.authenticate(viewController: cameFrom!, localizedReasonString: reasonString, oauth2Module: self, callback: completionHandler)
+        return
     }
     
     func extractCode(fromUrl url: URL?, completionHandler: @escaping (AnyObject?, NSError?) -> Void) {

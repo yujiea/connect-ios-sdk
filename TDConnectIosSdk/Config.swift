@@ -137,11 +137,6 @@ open class Config {
     for authorization code grant flow.
     */
     open var isWebView: Bool = false
-    
-    /**
-     Boolean to indicate whether or not to use biometric authentication if the user already has a session
-    */
-    open var useBiometrics: Bool = false
         
     /**
     Boolean to indicate whether the client is a public client (true) or a confidential client (false).
@@ -158,7 +153,7 @@ open class Config {
         UIApplication.shared.keyWindow?.rootViewController?.present(webView, animated: true, completion: nil)
     }
 
-    public init(base: String, authzEndpoint: String, redirectURL: String, accessTokenEndpoint: String, clientId: String, audienceId: String? = nil, refreshTokenEndpoint: String? = nil, revokeTokenEndpoint: String? = nil, wellKnownConfigurationEndpoint: String? = nil, isOpenIDConnect: Bool = false, userInfoEndpoint: String? = nil, logOutEndpoint: String? = nil, scopes: [String] = [],  clientSecret: String? = nil, accountId: String? = nil, claims: Set<String>? = nil, optionalParams: [String: String]? = nil, isWebView: Bool = false, useBiometrics: Bool = false, biometricsString: String? = nil, isPublicClient: Bool = true) {
+    public init(base: String, authzEndpoint: String, redirectURL: String, accessTokenEndpoint: String, clientId: String, audienceId: String? = nil, refreshTokenEndpoint: String? = nil, revokeTokenEndpoint: String? = nil, wellKnownConfigurationEndpoint: String? = nil, isOpenIDConnect: Bool = false, userInfoEndpoint: String? = nil, logOutEndpoint: String? = nil, scopes: [String] = [],  clientSecret: String? = nil, accountId: String? = nil, claims: Set<String>? = nil, optionalParams: [String: String]? = nil, isWebView: Bool = false, isPublicClient: Bool = true) {
         self.baseURL = base
         self.authzEndpoint = authzEndpoint
         self.redirectURL = redirectURL
@@ -178,6 +173,5 @@ open class Config {
         self.optionalParams = optionalParams
         self.isWebView = isWebView
         self.isPublicClient = isPublicClient
-        self.useBiometrics = useBiometrics
     }
 }
