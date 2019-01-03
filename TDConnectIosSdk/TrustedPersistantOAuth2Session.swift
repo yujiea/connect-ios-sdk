@@ -95,7 +95,7 @@ public class KeychainWrap {
             let attributesToUpdate = NSMutableDictionary()
             attributesToUpdate[kSecValueData as String] = unwrappedDataFromString
             attributesToUpdate[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
-                
+
             let statusUpdate: OSStatus = SecItemUpdate(keychainQuery, attributesToUpdate)
             if (statusUpdate != errSecSuccess) {
                 print("tokens not updated")
@@ -370,23 +370,23 @@ public class TrustedPersistentOAuth2Session: OAuth2Session {
             } else {
                 self.keychain = KeychainWrap()
             }
-            
+
             if accessToken != nil {
                 self.accessToken = accessToken
             }
-            
+
             if refreshToken != nil {
                 self.refreshToken = refreshToken
             }
-            
+
             if accessTokenExpirationDate != nil {
                 self.accessTokenExpirationDate = accessTokenExpirationDate
             }
-            
+
             if refreshToken != nil {
                 self.refreshTokenExpirationDate = refreshTokenExpirationDate
             }
-            
+
             if idToken != nil {
                 self.idToken = idToken
             }

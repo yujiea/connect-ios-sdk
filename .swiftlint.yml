@@ -1,0 +1,14 @@
+disabled_rules: # rule identifiers to exclude from running
+  - identifier_name
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+force_cast:
+  severity: warning
+force_try:
+  severity: warning
+line_length: 
+  error: 9999
+type_body_length:
+  error: 9999
+#reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown)
