@@ -44,9 +44,9 @@ enum AuthorizationState {
 }
 
 public enum OAuth2Error: Error {
-    case MissingRefreshToken
-    case UnexpectedResponse(String)
-    case UnequalStateParameter(String)
+    case missingRefreshToken
+    case unexpectedResponse(String)
+    case unequalStateParameter(String)
 }
 
 public enum BrowserType {
@@ -258,7 +258,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
         let stateFromRedirectUrl = self.parametersFrom(queryString: successUrl.query)["state"]
 
         if stateFromRedirectUrl != state {
-            let error = OAuth2Error.UnequalStateParameter("The state parameter in the redirect url was not the same as the one sent to the auth server.") as NSError
+            let error = OAuth2Error.unequalStateParameter("The state parameter in the redirect url was not the same as the one sent to the auth server.") as NSError
             self.callCompletion(success: nil, error: error, completionHandler: completionHandler)
             return
         }
@@ -383,7 +383,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     */
     open func refreshAccessToken(completionHandler: @escaping (AnyObject?, NSError?) -> Void) {
         guard let unwrappedRefreshToken = self.oauth2Session.refreshToken else {
-            completionHandler(nil, OAuth2Error.MissingRefreshToken as NSError)
+            completionHandler(nil, OAuth2Error.missingRefreshToken as NSError)
             return
         }
 
@@ -403,7 +403,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             }
 
             guard let unwrappedResponse = response as? [String: AnyObject] else {
-                completionHandler(nil, OAuth2Error.UnexpectedResponse(response as! String) as NSError)
+                completionHandler(nil, OAuth2Error.unexpectedResponse(response as! String) as NSError)
                 return
             }
 
@@ -495,7 +495,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
 
             guard let unwrappedResponse = responseObject as? [String: AnyObject] else {
                 self.sendAnalyticsData(accessToken: nil, subjectId: nil)
-                completionHandler(nil, OAuth2Error.UnexpectedResponse(responseObject as! String) as NSError)
+                completionHandler(nil, OAuth2Error.unexpectedResponse(responseObject as! String) as NSError)
                 return
             }
 
