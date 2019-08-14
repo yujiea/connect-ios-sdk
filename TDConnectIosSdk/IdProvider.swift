@@ -15,7 +15,7 @@ public enum IdProvider {
             case .connectId:
                 return useStaging ? "https://connect.staging.telenordigital.com/oauth" : "https://connect.telenordigital.com/oauth";
             case .telenorId:
-                return useStaging ? "https://staging.telenorid.com/oauth" : "example.com"; // TODO: Production is not set yet
+                return useStaging ? "https://signin.staging-telenorid.com/oauth" : "https://signin.telenorid.com/oauth";
         }
     }
 }
