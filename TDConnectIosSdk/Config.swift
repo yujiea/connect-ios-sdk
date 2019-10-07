@@ -134,25 +134,11 @@ open class Config {
     public var optionalParams: [String: String]?
     
     /**
-    Boolean to indicate to either used a webview (if true) or an external browser (by default, false)
-    for authorization code grant flow.
-    */
-    open var isWebView: Bool = false
-    
-    /**
     Boolean to indicate whether the client is a public client (true) or a confidential client (false).
     A public client will exchange the authorization code for tokens, on successful authentication and authorization.
     A confidential client will not exchange the authorization code but simply return this to the client through the callback, on successful authentication and authorization.
     */
     public let isPublicClient: Bool
-    
-    /**
-    A handler to allow the webview to be pushed onto the navigation controller
-    */
-    open var webViewHandler: ((OAuth2WebViewController, _ completionHandler: (AnyObject?, NSError?) -> Void) -> ()) = {
-        (webView, completionHandler) in
-        UIApplication.shared.keyWindow?.rootViewController?.present(webView, animated: true, completion: nil)
-    }
     
     /**
      In iOS 13 we need to help the OS out when it’s making the decision on where and how to display the OAuth Alert and Web login flow.
@@ -163,7 +149,7 @@ open class Config {
      */
     open var viewControllerContext: Any?
 
-    public init(base: String, authzEndpoint: String, redirectURL: String, accessTokenEndpoint: String, clientId: String, audienceId: String? = nil, refreshTokenEndpoint: String? = nil, revokeTokenEndpoint: String? = nil, wellKnownConfigurationEndpoint: String? = nil, isOpenIDConnect: Bool = false, userInfoEndpoint: String? = nil, logOutEndpoint: String? = nil, scopes: [String] = [],  clientSecret: String? = nil, accountId: String? = nil, claims: Set<String>? = nil, optionalParams: [String: String]? = nil, isWebView: Bool = false, isPublicClient: Bool = true, viewControllerContext: Any? = nil) {
+    public init(base: String, authzEndpoint: String, redirectURL: String, accessTokenEndpoint: String, clientId: String, audienceId: String? = nil, refreshTokenEndpoint: String? = nil, revokeTokenEndpoint: String? = nil, wellKnownConfigurationEndpoint: String? = nil, isOpenIDConnect: Bool = false, userInfoEndpoint: String? = nil, logOutEndpoint: String? = nil, scopes: [String] = [],  clientSecret: String? = nil, accountId: String? = nil, claims: Set<String>? = nil, optionalParams: [String: String]? = nil, isPublicClient: Bool = true, viewControllerContext: Any? = nil) {
         self.baseURL = base
         self.authzEndpoint = authzEndpoint
         self.redirectURL = redirectURL
@@ -181,7 +167,6 @@ open class Config {
         self.accountId = accountId
         self.claims = claims
         self.optionalParams = optionalParams
-        self.isWebView = isWebView
         self.isPublicClient = isPublicClient
         self.viewControllerContext = viewControllerContext
     }
