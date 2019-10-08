@@ -50,7 +50,6 @@ public enum OAuth2Error: Error {
 }
 
 public enum BrowserType {
-    case webView
     case safariViewController
     case webAuthenticationSession
     case safariAuthenticationSession
@@ -59,7 +58,6 @@ public enum BrowserType {
 
     var description : String {
         switch self {
-            case .webView: return "web-view";
             case .safariViewController: return "safari-view-controller";
             case .webAuthenticationSession: return "web-authentication-session";
             case .safariAuthenticationSession: return "safari-authentication-session";
@@ -173,9 +171,6 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     }
 
     func getBrowserTypeToUse() -> BrowserType {
-        if self.config.isWebView {
-            return .webView;
-        }
         if #available(iOS 12.0, *) {
             return .webAuthenticationSession;
         }
@@ -219,7 +214,9 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
 
         self.logSessionId = NSUUID().uuidString
 
-        let useForcedHeaderInjection = browserType == .webView && ForcedHEManager.isCellularEnabled() && ForcedHEManager.isWifiEnabled();
+        // This feature was used in webviews only, that are currently not supported.
+        // Cause should be revisited afterwards
+        let useForcedHeaderInjection = false; // ForcedHEManager.isCellularEnabled() && ForcedHEManager.isWifiEnabled();
         if (!ForcedHEManager.isCellularEnabled()) {
             config.optionalParams!["prompt"] = "no_seam";
         }
@@ -270,7 +267,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     }
     
     func callCompletion(success: AnyObject?, error: NSError?, completionHandler: @escaping (AnyObject?, NSError?) -> Void) {
-        if browserType == .safariViewController || browserType == .webView {
+        if browserType == .safariViewController {
             UIApplication.shared.tdcTopViewController?.dismiss( animated: true, completion: {
                 completionHandler(success, error)
             })
@@ -348,11 +345,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
     }
     
     fileprivate func launchBrowser(_ url: URL, _ state: String, _ completionHandler: @escaping (AnyObject?, NSError?) -> Void) {
-        if browserType == .webView || browserType == .unknown {
-            let webViewController = OAuth2WebViewController()
-            webViewController.targetURL = url;
-            UIApplication.shared.tdcTopViewController?.present(webViewController, animated: true, completion: nil)
-        } else if browserType == .webAuthenticationSession {
+        if browserType == .webAuthenticationSession {
             guard #available(iOS 12.0, *) else {
                 fatalError("Inconstant iOS version between here and getBrowserTypeToUse()")
             }
@@ -379,7 +372,7 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
             let safariViewController = SFSafariViewController(url: url as URL)
             safariViewController.delegate = self
             UIApplication.shared.tdcTopViewController?.present(safariViewController, animated: true, completion: nil)
-        } else if browserType == .safariExternalBrowser {
+        } else if browserType == .safariExternalBrowser || browserType == .unknown {
             UIApplication.shared.openURL(url as URL)
         }
     }

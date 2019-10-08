@@ -136,7 +136,6 @@ open class TelenorConnectConfig: Config {
                  useStaging: Bool,
                  scopes: [String],
                  accountId: String,
-                 webView: Bool,
                  claims: Set<String>? = nil,
                  optionalParams: [String:String]? = nil,
                  isPublicClient: Bool = true,
@@ -161,7 +160,6 @@ open class TelenorConnectConfig: Config {
             accountId: accountId,
             claims: claims,
             optionalParams: optionalParams,
-            isWebView: webView,
             isPublicClient: isPublicClient,
             viewControllerContext: viewControllerContext
         )

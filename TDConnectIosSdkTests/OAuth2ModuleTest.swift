@@ -208,7 +208,6 @@ class OAuth2ModuleTests: XCTestCase {
             useStaging: true,
             scopes: ["scope1", "scope2"],
             accountId: "accountId",
-            webView: false,
             claims: ["claim1", "claim2"])
         let mockedSession = MockOAuth2SessionWithRefreshToken()
         let oauth2Module: OAuth2Module = TelenorConnectOAuth2Module(config: config, session: mockedSession)
@@ -248,7 +247,6 @@ class OAuth2ModuleTests: XCTestCase {
             useStaging: true,
             scopes: ["scope1", "scope2"],
             accountId: "accountId",
-            webView: false,
             claims: ["claim1", "claim2"],
             optionalParams: ["optParam1Key": "optParam1Value", "optParam2Key": "optParam2Value"])
         let http = Http(baseURL: "https://connect.staging.telenordigital.com/oauth")
@@ -280,7 +278,6 @@ class OAuth2ModuleTests: XCTestCase {
             useStaging: true,
             scopes: ["scope1", "scope2"],
             accountId: "accountId",
-            webView: false,
             claims: nil,
             optionalParams: ["optParam1Key": "optParam1Value", "optParam2Key": "optParam2Value"])
         let http = Http(baseURL: "https://connect.staging.telenordigital.com/oauth")
@@ -299,7 +296,6 @@ class OAuth2ModuleTests: XCTestCase {
             useStaging: true,
             scopes: ["scope1", "scope2"],
             accountId: "accountId",
-            webView: false,
             claims: nil,
             optionalParams: ["optParam1Key": "optParam1Value", "optParam2Key": "optParam2Value"])
         let http = Http(baseURL: "https://connect.staging.telenordigital.com/oauth")
