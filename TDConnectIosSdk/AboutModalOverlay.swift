@@ -16,31 +16,22 @@ public class AboutModalOverlay: UIView {
     @IBOutlet private weak var closeButton: UIButton!
     
     let nibName = "AboutModalOverlay"
+    var idProvider: IdProvider!
     var contentView: UIView!
+    
+    public convenience init(frame: CGRect, idProvider: IdProvider) {
+        self.init(frame: frame)
+        self.idProvider = idProvider
+        setUpView()
+    }
         
     public override init(frame: CGRect) {
-        // For use in code
         super.init(frame: frame)
-        setUpView()
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        // For use in Interface Builder
         super.init(coder: aDecoder)
         setUpView()
-    }
-    
-    // In case if fonts are missing or namings are different
-    public func provideFonts(titleFont: UIFont?, subtitleFont: UIFont?, descriptionFont: UIFont?) {
-        if (titleFont != nil) {
-            title.font = titleFont
-        }
-        if (subtitleFont != nil) {
-            subtitle.font = subtitleFont
-        }
-        if (descriptionFont != nil) {
-            contentDescription.font = descriptionFont
-        }
     }
     
     private func setUpView() {
@@ -50,16 +41,16 @@ public class AboutModalOverlay: UIView {
         addSubview(contentView)
         
         self.contentView.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.width, height: self.frame.height)
-        
-        title.text = "What is Telenor ID?"
+
+        title.text = String(format: "What is %@?", self.idProvider.getName())
         title.lineBreakMode = .byWordWrapping
         title.font = UIFont(name: "Telenor-Bold", size: 24)
         
-        subtitle.text = "With a single Telenor ID you easily access your apps and services.";
+        subtitle.text = String(format: "With a single %@ you easily access your apps and services.", self.idProvider.getName())
         subtitle.lineBreakMode = .byWordWrapping
         subtitle.font = UIFont(name: "Telenor", size: 17)
         
-        contentDescription.text = "The sign-in process has additional layers of protection, such as verifying your mobile number and email. Telenor ID gives you full control of your personal data, while keeping it safe.";
+        contentDescription.text = String(format: "The sign-in process has additional layers of protection, such as verifying your mobile number and email. %@ gives you full control of your personal data, while keeping it safe.", self.idProvider.getName())
         contentDescription.lineBreakMode = .byWordWrapping
         contentDescription.font = UIFont(name: "Telenor-Light", size: 17)
         
@@ -69,7 +60,6 @@ public class AboutModalOverlay: UIView {
     @IBAction func closePopup(_ sender: Any) {
         self.removeFromSuperview()
     }
-
     
     // Allow view to control itself
     public override func layoutSubviews() {

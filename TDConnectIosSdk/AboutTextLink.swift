@@ -14,12 +14,17 @@ public class AboutTextLink: UIView {
     private var textColor: UIColor = UIColor.darkGray
     
     let nibName = "AboutTextLink"
+    var idProvider: IdProvider!
     var contentView: UIView!
     
-    public override init(frame: CGRect) {
-        // For use in code
-        super.init(frame: frame)
+    public convenience init(frame: CGRect, idProvider: IdProvider) {
+        self.init(frame: frame)
+        self.idProvider = idProvider
         setUpView()
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -40,7 +45,7 @@ public class AboutTextLink: UIView {
 
         // Make a string
         let finalString = NSMutableAttributedString()
-        let genericString = NSMutableAttributedString(string: "Your Telenor ID is used to sign in to\nall apps and services.\u{0020}", attributes: [NSAttributedString.Key.font: UIFont(name: "Telenor-Light", size: 12.0)!])
+        let genericString = NSMutableAttributedString(string: String(format: "Your %@ is used to sign in to\nall apps and services.\u{0020}", self.idProvider.getName()), attributes: [NSAttributedString.Key.font: UIFont(name: "Telenor-Light", size: 12.0)!])
         let learnMoreString = NSMutableAttributedString(string: "Learn more\u{00A0}\u{203A}", attributes: [NSAttributedString.Key.font: UIFont(name: "Telenor-Bold", size: 12.0)!])
         finalString.append(genericString)
         finalString.append(learnMoreString)
@@ -67,7 +72,7 @@ public class AboutTextLink: UIView {
         if tap.didTapAttributedTextInTextView(textView: openPopupLabel, inRange: range) {
             // Substring tapped
             let window = UIApplication.shared.keyWindow!
-            let modalView = AboutModalOverlay(frame: CGRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height))
+            let modalView = AboutModalOverlay(frame: CGRect(x: 0, y: 0, width: window.frame.width, height: window.frame.height), idProvider: idProvider)
             window.addSubview(modalView)
         }
     }
