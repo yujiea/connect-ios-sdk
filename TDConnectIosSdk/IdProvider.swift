@@ -9,7 +9,20 @@
 import Foundation
 
 public enum IdProvider {
+    
     case connectId, telenorId, gpId
+    
+    func getName() -> String {
+        switch self {
+        case .connectId:
+            return "CONNECT";
+        case .telenorId:
+            return "Telenor ID";
+        case .gpId:
+            return "GP ID";
+        }
+    }
+    
     func getUrl(useStaging: Bool) -> String {
         switch self {
             case .connectId:
@@ -20,4 +33,5 @@ public enum IdProvider {
                 return useStaging ? "https://signin.gp-id-staging.com/oauth" : "https://signin.gp-id.com/oauth";
         }
     }
+    
 }
