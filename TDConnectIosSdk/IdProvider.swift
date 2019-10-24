@@ -9,13 +9,29 @@
 import Foundation
 
 public enum IdProvider {
-    case connectId, telenorId
+    
+    case connectId, telenorId, gpId
+    
+    func getName() -> String {
+        switch self {
+        case .connectId:
+            return "CONNECT";
+        case .telenorId:
+            return "Telenor ID";
+        case .gpId:
+            return "GP ID";
+        }
+    }
+    
     func getUrl(useStaging: Bool) -> String {
         switch self {
             case .connectId:
                 return useStaging ? "https://connect.staging.telenordigital.com/oauth" : "https://connect.telenordigital.com/oauth";
             case .telenorId:
-                return useStaging ? "https://signin.staging-telenorid.com/oauth" : "https://signin.telenorid.com/oauth";
+                return useStaging ? "https://signin.telenorid-staging.com/oauth" : "https://signin.telenorid.com/oauth";
+            case .gpId:
+                return useStaging ? "https://signin.gp-id-staging.com/oauth" : "https://signin.gp-id.com/oauth";
         }
     }
+    
 }
