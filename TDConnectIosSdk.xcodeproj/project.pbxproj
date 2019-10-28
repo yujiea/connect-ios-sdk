@@ -36,7 +36,12 @@
 		48CD52DD19B0C22A008D0694 /* OAuth2Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CD52DC19B0C22A008D0694 /* OAuth2Session.swift */; };
 		48CD52DF19B0CB5A008D0694 /* OAuth2SessionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CD52DE19B0CB5A008D0694 /* OAuth2SessionTest.swift */; };
 		48DE90A619CDEAEE007F9B21 /* KeycloakOAuth2Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE90A519CDEAEE007F9B21 /* KeycloakOAuth2Module.swift */; };
+		49237AEB23560DDE005C8F4E /* AboutModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49237AE923560DDE005C8F4E /* AboutModalOverlay.swift */; };
+		49237AF0235875DB005C8F4E /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49237AEF235875DB005C8F4E /* assets.xcassets */; };
+		49237B342359F767005C8F4E /* AboutTextLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49237B322359F767005C8F4E /* AboutTextLink.swift */; };
 		496D092F22770C2A00D752F5 /* IdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496D092E22770C2A00D752F5 /* IdProvider.swift */; };
+		499D75722361D5AC001ECBE8 /* AboutTextLink.xib in Resources */ = {isa = PBXBuildFile; fileRef = 499D75702361D5AC001ECBE8 /* AboutTextLink.xib */; };
+		499D75732361D5AC001ECBE8 /* AboutModalOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 499D75712361D5AC001ECBE8 /* AboutModalOverlay.xib */; };
 		5C542B581CABD3C400039789 /* IdTokenValidatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C542B571CABD3C400039789 /* IdTokenValidatorTest.swift */; };
 		5C8F38A2205A72260008756F /* JsonResponseSerializerWithDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8F38A1205A72260008756F /* JsonResponseSerializerWithDate.swift */; };
 		5CF359B21CAA8C800064C43D /* IdTokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF359B01CAA8C800064C43D /* IdTokenValidator.swift */; };
@@ -104,7 +109,12 @@
 		48CD52DC19B0C22A008D0694 /* OAuth2Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Session.swift; sourceTree = "<group>"; };
 		48CD52DE19B0CB5A008D0694 /* OAuth2SessionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2SessionTest.swift; sourceTree = "<group>"; };
 		48DE90A519CDEAEE007F9B21 /* KeycloakOAuth2Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeycloakOAuth2Module.swift; sourceTree = "<group>"; };
+		49237AE923560DDE005C8F4E /* AboutModalOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutModalOverlay.swift; sourceTree = "<group>"; };
+		49237AEF235875DB005C8F4E /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
+		49237B322359F767005C8F4E /* AboutTextLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextLink.swift; sourceTree = "<group>"; };
 		496D092E22770C2A00D752F5 /* IdProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdProvider.swift; sourceTree = "<group>"; };
+		499D75702361D5AC001ECBE8 /* AboutTextLink.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutTextLink.xib; sourceTree = "<group>"; };
+		499D75712361D5AC001ECBE8 /* AboutModalOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutModalOverlay.xib; sourceTree = "<group>"; };
 		5C542B571CABD3C400039789 /* IdTokenValidatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdTokenValidatorTest.swift; sourceTree = "<group>"; };
 		5C8F38A1205A72260008756F /* JsonResponseSerializerWithDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonResponseSerializerWithDate.swift; sourceTree = "<group>"; };
 		5CF359B01CAA8C800064C43D /* IdTokenValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdTokenValidator.swift; sourceTree = "<group>"; };
@@ -161,6 +171,8 @@
 		4833046419AF1635002F8DA9 /* TDConnectIosSdk */ = {
 			isa = PBXGroup;
 			children = (
+				499D75712361D5AC001ECBE8 /* AboutModalOverlay.xib */,
+				499D75702361D5AC001ECBE8 /* AboutTextLink.xib */,
 				01809E05207B99A20007A4A7 /* UIDeviceExtension.swift */,
 				01BD2C511F28A2370051E77C /* ForcedHEManager.h */,
 				01BD2C521F28A2370051E77C /* ForcedHEManager.m */,
@@ -181,6 +193,9 @@
 				4814EF4D19C1C10C008BAC4D /* FacebookOAuth2Module.swift */,
 				48DE90A519CDEAEE007F9B21 /* KeycloakOAuth2Module.swift */,
 				496D092E22770C2A00D752F5 /* IdProvider.swift */,
+				49237AE923560DDE005C8F4E /* AboutModalOverlay.swift */,
+				49237AEF235875DB005C8F4E /* assets.xcassets */,
+				49237B322359F767005C8F4E /* AboutTextLink.swift */,
 			);
 			path = TDConnectIosSdk;
 			sourceTree = "<group>";
@@ -334,7 +349,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
-				en,
 			);
 			mainGroup = 4833045819AF1635002F8DA9;
 			productRefGroup = 4833046319AF1635002F8DA9 /* Products */;
@@ -352,6 +366,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499D75732361D5AC001ECBE8 /* AboutModalOverlay.xib in Resources */,
+				49237AF0235875DB005C8F4E /* assets.xcassets in Resources */,
+				499D75722361D5AC001ECBE8 /* AboutTextLink.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,8 +452,10 @@
 				5C8F38A2205A72260008756F /* JsonResponseSerializerWithDate.swift in Sources */,
 				01BD2C591F28A2370051E77C /* OperatorInfo.swift in Sources */,
 				5CF359B31CAA8C800064C43D /* TelenorConnectOAuth2Module.swift in Sources */,
+				49237AEB23560DDE005C8F4E /* AboutModalOverlay.swift in Sources */,
 				48CD52DD19B0C22A008D0694 /* OAuth2Session.swift in Sources */,
 				48CD52D719B0C1CB008D0694 /* OAuth2Module.swift in Sources */,
+				49237B342359F767005C8F4E /* AboutTextLink.swift in Sources */,
 				4872F71619EFE7D100F3FDE8 /* DateUtils.swift in Sources */,
 				4814EF4B19C1C0FA008BAC4D /* TrustedPersistantOAuth2Session.swift in Sources */,
 				01BD2C571F28A2370051E77C /* ForcedHEManager.m in Sources */,
