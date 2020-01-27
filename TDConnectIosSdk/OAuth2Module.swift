@@ -217,7 +217,8 @@ open class OAuth2Module: NSObject, AuthzModule, SFSafariViewControllerDelegate {
         // This feature was used in webviews only, that are currently not supported.
         // Cause should be revisited afterwards
         let useForcedHeaderInjection = false; // ForcedHEManager.isCellularEnabled() && ForcedHEManager.isWifiEnabled();
-        if (!ForcedHEManager.isCellularEnabled()) {
+        if (!ForcedHEManager.isCellularEnabled() ||
+            (ForcedHEManager.isCellularEnabled() && ForcedHEManager.isWifiEnabled())) {
             config.optionalParams!["prompt"] = "no_seam";
         }
         if (useForcedHeaderInjection) {
