@@ -21,7 +21,7 @@ DEPENDENCIES:
   - OHHTTPStubs (= 6.1.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AeroGearHttp
     - JSONWebToken
     - OHHTTPStubs
@@ -33,4 +33,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e9c03ac0e0a2faa9f9a173b7b6826cf6e4166dd6
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.10.1
