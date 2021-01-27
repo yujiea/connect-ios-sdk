@@ -37,8 +37,8 @@
 		48CD52DF19B0CB5A008D0694 /* OAuth2SessionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CD52DE19B0CB5A008D0694 /* OAuth2SessionTest.swift */; };
 		48DE90A619CDEAEE007F9B21 /* KeycloakOAuth2Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DE90A519CDEAEE007F9B21 /* KeycloakOAuth2Module.swift */; };
 		49237AEB23560DDE005C8F4E /* AboutModalOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49237AE923560DDE005C8F4E /* AboutModalOverlay.swift */; };
-		49237AF0235875DB005C8F4E /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49237AEF235875DB005C8F4E /* assets.xcassets */; };
 		49237B342359F767005C8F4E /* AboutTextLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49237B322359F767005C8F4E /* AboutTextLink.swift */; };
+		493D30C825C0CA40008E8B14 /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49237AEF235875DB005C8F4E /* assets.xcassets */; };
 		4966198C25B6FBEC001973EC /* HeTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4966198B25B6FBEC001973EC /* HeTokenResponse.swift */; };
 		496D092F22770C2A00D752F5 /* IdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496D092E22770C2A00D752F5 /* IdProvider.swift */; };
 		499D75722361D5AC001ECBE8 /* AboutTextLink.xib in Resources */ = {isa = PBXBuildFile; fileRef = 499D75702361D5AC001ECBE8 /* AboutTextLink.xib */; };
@@ -370,8 +370,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				499D75732361D5AC001ECBE8 /* AboutModalOverlay.xib in Resources */,
-				49237AF0235875DB005C8F4E /* assets.xcassets in Resources */,
 				499D75722361D5AC001ECBE8 /* AboutTextLink.xib in Resources */,
+				493D30C825C0CA40008E8B14 /* assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +531,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -599,6 +600,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
