@@ -12,19 +12,6 @@ public enum IdProvider {
     
     case connectId, telenorId, gpId, dtacId
     
-    func getName() -> String {
-        switch self {
-        case .connectId:
-            return "CONNECT";
-        case .telenorId:
-            return "Telenor ID";
-        case .gpId:
-            return "GP ID";
-        case .dtacId:
-            return "DTAC ID";
-        }
-    }
-    
     func getInstantVerificationUrl(useStaging: Bool) -> String {
         switch self {
             case .connectId:
