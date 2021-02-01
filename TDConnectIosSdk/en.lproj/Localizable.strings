@@ -1,0 +1,21 @@
+"brand_name_telenorid"="Telenor ID";
+"brand_name_gpid"="GP ID";
+"brand_name_connect"="CONNECT";
+"brand_name_dtacid"="DTAC ID";
+
+"network_name_telenorid"="Telenor";
+"network_name_gpid"="Grameenphone";
+"network_name_connect"="Telenor";
+"network_name_dtacid"="dtac";
+
+"about_description"="Your %@ is used to log in to all apps and services.\u{0020}";
+"about_link"="Learn more\u{00A0}\u{203A}";
+"about_back"="\u{2039}\u{00A0}Back";
+"about_screen_title"="What is %@?";
+"about_slogan"="One secure login for all services";
+"about_p1"="%@ provides users with a passwordless login for all apps and services.";
+"about_p2"="%@ mobile subscribers enjoy additional security and convenience by having their phone numbers automatically recognised and verified by the %@ mobile network.";
+"about_p3"="With risk-based authentication, %@ enhances user security by detecting unusual logins.";
+"about_p4"="An unusual login might be caused by logging in from a new location, or someone trying to fraudulently use your %@. In any case, the user will experience additional steps when logging in, in order to prevent abuse.";
+"about_p5"="Anyone can use %@, at no cost. You do not need to become a %@ subscriber.";
+"about_p6"="For higher risk logins, %@ can request a password as an additional step.";

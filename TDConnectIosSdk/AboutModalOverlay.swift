@@ -28,10 +28,12 @@ public class AboutModalOverlay: UIView {
     var idProvider: IdProvider!
     var contentView: UIView!
     var scrollView: UIScrollView!
+    var idLocale: IdLocale!
     
-    public convenience init(frame: CGRect, idProvider: IdProvider) {
+    public convenience init(frame: CGRect, idProvider: IdProvider, idLocale: IdLocale) {
         self.init(frame: frame)
         self.idProvider = idProvider
+        self.idLocale = idLocale
         setUpView()
     }
         
@@ -56,38 +58,39 @@ public class AboutModalOverlay: UIView {
         //insideContentView.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.width, height: 300)
         //insideScrollView.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: 200, height: 300)
         
-        backButton.setTitle("\u{2039} Back", for: .normal);
+        backButton.setTitle(idLocale.aboutBack(), for: .normal);
         backButton.titleLabel?.font = UIFont(name: "Telenor-Regular", size: 18)
+        backButton.sizeToFit()
         
-        slogan.text = String("One secure login for all services")
+        slogan.text = String(idLocale.aboutSlogan())
         slogan.lineBreakMode = .byWordWrapping
         slogan.font = UIFont(name: "Telenor-Light", size: 20)
 
-        title.text = String(format: "What is %@?", self.idProvider.getName())
+        title.text = String(idLocale.aboutScreenTitle(idProvider: self.idProvider))
         title.lineBreakMode = .byWordWrapping
         title.font = UIFont(name: "Telenor-Medium", size: 24)
         
-        paragraph1.text = String(format: "%@ provides all users with a passwordless login to all apps and services.", self.idProvider.getName())
+        paragraph1.text = String(idLocale.aboutParagraph1(idProvider: self.idProvider))
         paragraph1.lineBreakMode = .byWordWrapping
         paragraph1.font = UIFont(name: "Telenor-Light", size: 16)
         
-        paragraph2.text = String("Telenor mobile subscribers enjoy additional security and convenience by having their phone numbers automatically recognised and verified by the Telenor mobile network.")
+        paragraph2.text = String(idLocale.aboutParagraph2(idProvider: self.idProvider))
         paragraph2.lineBreakMode = .byWordWrapping
         paragraph2.font = UIFont(name: "Telenor-Light", size: 16)
         
-        paragraph3.text = String(format: "With risk-based authentication, %@ ensures user security by detecting unusual logins.", self.idProvider.getName())
+        paragraph3.text = String(idLocale.aboutParagraph3(idProvider: self.idProvider))
         paragraph3.lineBreakMode = .byWordWrapping
         paragraph3.font = UIFont(name: "Telenor-Light", size: 16)
         
-        paragraph4.text = String(format: "Unusual logins may just be you traveling to other locations, or someone trying to commit fraud using your %@. In any case, the user will go through one or more extra steps when logging in. This is designed to prevent attempted fraud.", self.idProvider.getName())
+        paragraph4.text = String(idLocale.aboutParagraph4(idProvider: self.idProvider))
         paragraph4.lineBreakMode = .byWordWrapping
         paragraph4.font = UIFont(name: "Telenor-Light", size: 16)
         
-        paragraph5.text = String(format: "Anyone can use %@ at no cost, no matter their mobile subscription.", self.idProvider.getName())
+        paragraph5.text = String(idLocale.aboutParagraph5(idProvider: self.idProvider))
         paragraph5.lineBreakMode = .byWordWrapping
         paragraph5.font = UIFont(name: "Telenor-Light", size: 13)
         
-        paragraph6.text = String(format: "For higher risk logins, %@ can request a password as an additional step.", self.idProvider.getName())
+        paragraph6.text = String(idLocale.aboutParagraph6(idProvider: self.idProvider))
         paragraph6.lineBreakMode = .byWordWrapping
         paragraph6.font = UIFont(name: "Telenor-Light", size: 13)
         

@@ -1,0 +1,21 @@
+"brand_name_telenorid"="Telenor ID";
+"brand_name_gpid"="GP ID";
+"brand_name_connect"="CONNECT";
+"brand_name_dtacid"="DTAC ID";
+
+"network_name_telenorid"="Telenor";
+"network_name_gpid"="Grameenphone";
+"network_name_connect"="Telenor";
+"network_name_dtacid"="dtac";
+
+"about_description"="Din %@ kan brukes til å logge deg inn til alle apper og tjenester.\u{0020}";
+"about_link"="Les mer\u{00A0}\u{203A}";
+"about_back"="\u{2039}\u{00A0}Tilbake";
+"about_screen_title"="Hva er %@?";
+"about_slogan"="En sikker innlogging for alle tjenester";
+"about_p1"="%@ tilbyr brukere en passordløs innlogging til alle apper og tjenester.";
+"about_p2"="%@s mobilabonnenter kan glede seg over ekstra sikkerhet og enkelhet når de logger inn, som følge av automatisk gjenkjenning og bekreftelse av mobilnummeret via %@s mobilnettverk.";
+"about_p3"="Med risikobasert autentisering forbedrer %@ brukerens sikkerhet ved at uvanlige innlogginger avdekkes.";
+"about_p4"="En uvanlig innlogging kan være forårsaket av deg selv når du logger inn fra en ny lokasjon, eller en annen bruker som forsøker seg på uredelig bruk av din %@. I begge tilfellene vil brukeren oppleve ekstra steg i innloggingsflyten for å forhindre misbruk.";
+"about_p5"="Alle kan bruke %@ gratis. Du trenger ikke å bli %@-abonnent.";
+"about_p6"="Ved innlogginger som har en høyere risiko, kan %@ forespørre passord som et ekstra steg i innloggingen.";
