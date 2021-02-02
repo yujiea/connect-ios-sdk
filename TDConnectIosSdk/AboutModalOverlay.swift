@@ -21,7 +21,7 @@ public class AboutModalOverlay: UIView {
     @IBOutlet private weak var paragraph6: UILabel!
     @IBOutlet private weak var insideContentView: UIView!
     @IBOutlet private weak var insideScrollView: UIScrollView!
-    @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet private weak var logoButton: UIButton!
     
 
     let nibName = "AboutModalOverlay"
@@ -54,9 +54,6 @@ public class AboutModalOverlay: UIView {
         
         self.contentView.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.width, height: self.frame.height)
         self.insideScrollView.contentSize = self.insideContentView.bounds.size;
-        
-        //insideContentView.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.width, height: 300)
-        //insideScrollView.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: 200, height: 300)
         
         backButton.setTitle(idLocale.aboutBack(), for: .normal);
         backButton.titleLabel?.font = UIFont(name: "Telenor-Regular", size: 18)
@@ -94,7 +91,18 @@ public class AboutModalOverlay: UIView {
         paragraph6.lineBreakMode = .byWordWrapping
         paragraph6.font = UIFont(name: "Telenor-Light", size: 13)
         
-        
+        if let logo = imageFromBase64(idProvider.getBase64Logo()) {
+            logoButton.setImage(logo, for: .normal)
+        }
+    }
+    
+    private func imageFromBase64(_ base64: String) -> UIImage? {
+        if let url = URL(string: base64) {
+            if let data = try? Data(contentsOf: url) {
+                return UIImage(data: data)
+            }
+        }
+        return nil
     }
     
     @IBAction func closePopup(_ sender: Any) {

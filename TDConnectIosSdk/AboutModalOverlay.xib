@@ -14,6 +14,7 @@
                 <outlet property="backButton" destination="HOZ-o0-3aj" id="VbR-Rs-2yQ"/>
                 <outlet property="insideContentView" destination="1Jr-Rz-rmI" id="RQZ-bG-UGU"/>
                 <outlet property="insideScrollView" destination="hIQ-cV-p9w" id="WUS-ee-0wt"/>
+                <outlet property="logoButton" destination="00l-We-3C9" id="x7z-Hd-Igb"/>
                 <outlet property="paragraph1" destination="SXy-Eq-EgC" id="r9Q-b2-KTD"/>
                 <outlet property="paragraph2" destination="R9n-dL-Rkg" id="3XH-5q-1HU"/>
                 <outlet property="paragraph3" destination="zHC-B5-LUo" id="OnI-pw-bdw"/>
@@ -26,22 +27,16 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="310" height="817"/>
+            <rect key="frame" x="0.0" y="0.0" width="310" height="900"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hIQ-cV-p9w">
-                    <rect key="frame" x="0.0" y="0.0" width="310" height="811"/>
+                    <rect key="frame" x="0.0" y="0.0" width="310" height="900"/>
                     <subviews>
                         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1Jr-Rz-rmI" userLabel="InnerContentView">
-                            <rect key="frame" x="0.0" y="0.0" width="310" height="811"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <rect key="frame" x="0.0" y="0.0" width="310" height="900"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One secure login for all services" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWZ-9g-yfV">
-                                    <rect key="frame" x="24" y="94" width="262" height="48"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" id="HOZ-o0-3aj">
                                     <rect key="frame" x="24" y="44" width="62" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
@@ -51,6 +46,12 @@
                                         <action selector="closePopup:" destination="-1" eventType="touchUpInside" id="Ppb-iC-9Lp"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One secure login for all services" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWZ-9g-yfV">
+                                    <rect key="frame" x="24" y="94" width="262" height="48"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="What is Telenor ID?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M26-Jk-QfC">
                                     <rect key="frame" x="24" y="166" width="262" height="21.5"/>
                                     <edgeInsets key="layoutMargins" top="40" left="24" bottom="0.0" right="24"/>
@@ -96,10 +97,18 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00l-We-3C9">
+                                    <rect key="frame" x="86" y="785" width="138" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="138" id="iXC-9y-4q1"/>
+                                        <constraint firstAttribute="height" constant="34" id="wfA-lA-xsZ"/>
+                                    </constraints>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="sgb-ot-Rv2" secondAttribute="trailing" constant="24" id="32y-jw-4fI"/>
+                                <constraint firstItem="00l-We-3C9" firstAttribute="centerX" secondItem="1Jr-Rz-rmI" secondAttribute="centerX" id="3Jb-Zk-l7n"/>
                                 <constraint firstAttribute="trailing" secondItem="SXy-Eq-EgC" secondAttribute="trailing" constant="24" id="3g2-dt-6Os"/>
                                 <constraint firstItem="sgb-ot-Rv2" firstAttribute="top" secondItem="zHC-B5-LUo" secondAttribute="bottom" constant="20" id="5Fl-Ae-dCn"/>
                                 <constraint firstItem="sgb-ot-Rv2" firstAttribute="leading" secondItem="1Jr-Rz-rmI" secondAttribute="leading" constant="24" id="Bjg-Rw-fDP"/>
@@ -115,6 +124,7 @@
                                 <constraint firstAttribute="trailing" secondItem="7Ww-kd-vSJ" secondAttribute="trailing" constant="24" id="TSr-kj-0ad"/>
                                 <constraint firstItem="M26-Jk-QfC" firstAttribute="leading" secondItem="1Jr-Rz-rmI" secondAttribute="leading" constant="24" id="atN-zL-ZNI"/>
                                 <constraint firstAttribute="trailing" secondItem="zHC-B5-LUo" secondAttribute="trailing" constant="24" id="bC2-i1-zAz"/>
+                                <constraint firstItem="00l-We-3C9" firstAttribute="top" secondItem="7Ww-kd-vSJ" secondAttribute="bottom" constant="24" id="bIa-LL-5OR"/>
                                 <constraint firstAttribute="trailing" secondItem="xCw-TB-CZP" secondAttribute="trailing" constant="24" id="cvI-5s-TsH"/>
                                 <constraint firstItem="XWZ-9g-yfV" firstAttribute="leading" secondItem="1Jr-Rz-rmI" secondAttribute="leading" constant="24" id="d2Z-uR-O4Y"/>
                                 <constraint firstItem="7Ww-kd-vSJ" firstAttribute="leading" secondItem="1Jr-Rz-rmI" secondAttribute="leading" constant="24" id="eYQ-gO-YCA"/>
@@ -131,14 +141,14 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="hIQ-cV-p9w" secondAttribute="bottom" id="3t4-Eb-SKa"/>
-                <constraint firstAttribute="trailing" secondItem="hIQ-cV-p9w" secondAttribute="trailing" id="S1K-Ah-zWg"/>
-                <constraint firstItem="hIQ-cV-p9w" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YIe-P2-Zlw"/>
-                <constraint firstItem="hIQ-cV-p9w" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tQz-mF-isd"/>
+                <constraint firstItem="hIQ-cV-p9w" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RVd-TV-KKM"/>
+                <constraint firstItem="hIQ-cV-p9w" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="e8m-H3-lKA"/>
+                <constraint firstAttribute="bottom" secondItem="hIQ-cV-p9w" secondAttribute="bottom" id="h12-Hi-I9K"/>
+                <constraint firstItem="hIQ-cV-p9w" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="nZr-09-tfO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-            <point key="canvasLocation" x="140.57971014492756" y="70.647321428571431"/>
+            <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
+            <point key="canvasLocation" x="140.57971014492756" y="79.6875"/>
         </view>
     </objects>
     <resources>
